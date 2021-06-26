@@ -1,7 +1,10 @@
 import { app, BrowserWindow } from "electron";
 import { add } from "@common/utils";
+import cors from "cors";
 import { join } from "path";
 import { pathToFileURL, format as formatUrl } from "url";
+import express from "express";
+import writeJsonFile from "write-json-file";
 
 const isDevelopment = process.env.NODE_ENV === "development";
 
@@ -40,3 +43,15 @@ app.on("activate", () => {
     createWindow();
   }
 });
+
+const expressApp = express();
+expressApp.use(cors());
+
+expressApp.use(express.json());
+
+expressApp.get("/", async (req, res) => {
+  await writeJsonFile("foo.json", { foo: true });
+  return res.json("Hasi");
+});
+
+expressApp.listen(5000);

@@ -1,9 +1,14 @@
 import React, { useState } from "react";
 import logo from "./logo.svg";
 import "./App.css";
+// import writeJsonFile from "write-json-file";
 
 function App() {
   const [count, setCount] = useState(0);
+
+  const write = async () => {
+    // await writeJsonFile("foo.json", { foo: true });
+  };
 
   return (
     <div className="App">
@@ -14,6 +19,9 @@ function App() {
           <button onClick={() => setCount((count) => count + 1)}>
             count {count}
           </button>
+          <br />
+
+          <button onClick={write}>write {count}</button>
         </p>
         <p>
           Edit <code>App.tsx</code> and save to test HMR updates.
